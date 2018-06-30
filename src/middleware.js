@@ -10,6 +10,10 @@ module.exports = config => {
     config.rasa_uri = 'http://localhost:5000'
   }
 
+  if (!config.project) {
+    config.rasa_project = 'default'
+  }
+
   var middleware = {
     receive: (bot, message, next) => {
       if (!message.text || message.is_echo) {
@@ -22,7 +26,9 @@ module.exports = config => {
         method: 'POST',
         uri: `${config.rasa_uri}/parse`,
         body: {
-          q: message.text
+          q: message.text,
+          project: config.rasa_project,
+          model: config.rasa_model
         },
         json: true
       }

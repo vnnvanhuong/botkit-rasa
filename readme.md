@@ -4,7 +4,11 @@ This plugin provides Botkit developers a way to use the [rasa NLU](https://rasa.
 
 
 ```
-var rasa = require('botkit-rasa')({rasa_uri: 'http://localhost:5000'});
+var rasa = require('botkit-rasa')({
+    rasa_uri: 'http://localhost:5000',
+    rasa_project: 'my_bot',
+    rasa_model: 'my_model'
+});
 controller.middleware.receive.use(rasa.receive);
 
 controller.hears(['my_intent'],'message_received', rasa.hears, function(bot, message) {
